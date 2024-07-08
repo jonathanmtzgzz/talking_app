@@ -32,7 +32,6 @@ class HerMessageBubble extends StatelessWidget {
 
         const SizedBox( height: 10),
 
-        // Todo: imagen
       ],
     );
   }
@@ -43,7 +42,7 @@ class _ImageBubble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size; //* Obtener el tamaño de la pantalla
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(20),
@@ -52,6 +51,15 @@ class _ImageBubble extends StatelessWidget {
         width: size.width * 0.7,
         height: 150,
         fit: BoxFit.cover, //* Basado en las dimensiones de la img, colocala
+        loadingBuilder: (context, child, loadinProgress) {
+          if (loadinProgress == null) return child;
+
+          return Container(
+            width: size.width * 0.7,
+            height: 150,
+            padding: const EdgeInsets.symmetric( horizontal: 10, vertical: 5),
+          );
+        },
       )
     );
   }
